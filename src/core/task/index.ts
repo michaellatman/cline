@@ -1936,6 +1936,7 @@ export class Task {
 						showSystemNotification({
 							subtitle: "Approval Required",
 							message,
+							sound: "Funk",
 						})
 					}
 				}
@@ -3582,6 +3583,7 @@ export class Task {
 									showSystemNotification({
 										subtitle: "Task Completed",
 										message: result.replace(/\n/g, " "),
+										sound: "Ping",
 									})
 								}
 

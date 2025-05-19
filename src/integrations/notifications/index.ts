@@ -5,12 +5,13 @@ interface NotificationOptions {
 	title?: string
 	subtitle?: string
 	message: string
+	sound?: string
 }
 
 async function showMacOSNotification(options: NotificationOptions): Promise<void> {
-	const { title, subtitle = "", message } = options
+	const { title, subtitle = "", message, sound = "Tink" } = options
 
-	const script = `display notification "${message}" with title "${title}" subtitle "${subtitle}" sound name "Tink"`
+	const script = `display notification "${message}" with title "${title}" subtitle "${subtitle}" sound name "${sound}"`
 
 	try {
 		await execa("osascript", ["-e", script])
@@ -76,6 +77,7 @@ export async function showSystemNotification(options: NotificationOptions): Prom
 			title: title.replace(/"/g, '\\"'),
 			message: message.replace(/\\/g, "\\\\").replace(/"/g, '\\"'),
 			subtitle: options.subtitle?.replace(/"/g, '\\"') || "",
+			sound: options.sound,
 		}
 
 		switch (platform()) {
